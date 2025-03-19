@@ -2,7 +2,6 @@
        GENERATED STRINGS     
 ============================
 
-<<<<<<< HEAD
 1. baba
 2. a
 3. aabb
@@ -13,10 +12,3 @@
 8. babbab
 9. aaa
 10. aabbbbb
-=======
-1. baab
-2. abbaabbbab
-3. bababbaaaa
-4. aaaaba
-5. aabb
->>>>>>> 76d8b44d924ae4ad99632428003d07f1f63f65da
