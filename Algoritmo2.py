@@ -1,18 +1,22 @@
-with open("generated_strings.txt", "r") as file:
-    lines = file.readlines()  #Open the file
+from tabulate import tabulate
 
-string_list = [] #Inicializate a empty list
+# El resto de tu código
+
+
+with open("generated_strings.txt", "r") as file:
+    lines = file.readlines()  # Open the file
+
+string_list = []  # Initialize an empty list
 
 for line in lines:
-    parts = line.strip().split(maxsplit=1)  #Split strings to be easier to read later(by index, space and contend)
-    if len(parts) > 1 and parts[0].isdigit():  
-        string_list.append(parts[1])  
-
+    parts = line.strip().split(maxsplit=1)  # Split to make it easier to read later (by index, space, and content)
+    if len(parts) > 1 and parts[0].isdigit():
+        string_list.append(parts[1])
 
 for line in lines[4:]:  
     parts = line.strip().split(maxsplit=1)  
     if len(parts) > 1:
-        string_list.append(parts[1])  #Add strings where the shape is correct
+        string_list.append(parts[1])  # Add strings where the shape is correct
 
 
 class PDA:
@@ -27,18 +31,18 @@ class PDA:
             if (current_state == "q0" and char == "" and stack[-1] == "S"):
                 stack.pop()
                 return 1
-            elif (current_state == "q0" and char == "a" and stack[-1] == "S"):
+            elif current_state == "q0" and char == "a" and stack[-1] == "S":
                 stack.pop()
                 stack.append("a")
                 return 2
-            elif (current_state == "q0" and char == "a" and stack[-1] == "a"):
+            elif current_state == "q0" and char == "a" and stack[-1] == "a":
                 stack.append("a")
                 return 3
-            elif (current_state == "q0" and char == "b" and stack[-1] == "a"):
+            elif current_state == "q0" and char == "b" and stack[-1] == "a":
                 stack.pop()
                 current_state = "q1"
                 return 4
-            elif (current_state == "q1" and char == "b" and stack[-1] == "a"):
+            elif current_state == "q1" and char == "b" and stack[-1] == "a":
                 stack.pop()
                 return 5
             else:
@@ -55,7 +59,7 @@ class PDA:
 
         if len(string) == 0: # If the string is empty, we return true, because the grammar accepts epsilon
             return True
-        
+
         transitions_done = []
 
         for char in string:
@@ -73,11 +77,18 @@ class PDA:
 
 pda = PDA()
 
+results = []
+
 for string in string_list:
-    accepted = pda.is_valid(string)     # Check every string from the txt file
-    if accepted:
-        print(f"The string '{string}' is accepted by the grammar")
-    else:
-        print(f"The string '{string}' is not accepted by the grammar")
+    accepted = pda.is_valid(string)
+    checkmark = "✔" if accepted else "❌"
+    results.append([string, checkmark])
 
+# Create table using tabulate
+table = tabulate(results, headers=["String", "Result"], tablefmt="grid")
 
+# Export table to a .txt file
+with open("results.txt", "w", encoding="utf-8") as output_file:
+    output_file.write(table)
+
+print("\n✅ Results exported to 'results.txt'")
