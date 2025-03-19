@@ -9,7 +9,7 @@ def invalid (num_letters):
     generated_string = "".join(random.choice(["a", "b"]) for _ in range(num_letters))
     return generated_string
 # Ask user for string generated number
-num_strings = int(input("Please enter how many strings you want to generate: ")) 
+num_strings = int(input("Please enter how many strings you want to generate: "))
 string_set = set() # Using a set to avoid duplicate data
 
 # Generated unique strings
