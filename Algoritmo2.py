@@ -1,7 +1,5 @@
 from tabulate import tabulate
 
-# El resto de tu código
-
 
 with open("generated_strings.txt", "r") as file:
     lines = file.readlines()  # Open the file
@@ -73,7 +71,7 @@ results = []
 
 for string in string_list:
     accepted = pda.is_valid(string)
-    checkmark = "✔" if accepted else "❌"
+    checkmark = "✅" if accepted else "❌"
     results.append([string, checkmark])
 
 # Create table using tabulate
