@@ -1,9 +1,0 @@
-============================
-       GENERATED STRINGS     
-============================
-
-1. baab
-2. abbaabbbab
-3. bababbaaaa
-4. aaaaba
-5. aabb
