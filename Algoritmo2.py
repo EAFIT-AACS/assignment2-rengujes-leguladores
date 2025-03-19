@@ -19,12 +19,14 @@ for line in lines[4:]:
 
 class PDA:
     def __init__(self):
-        self.starting_pile_symbol = "S"  # We use the empty stack for acceptance
+        self.starting_pile_symbol = "S" # Give the PDA starting parameters
         self.starting_state = "q0"
 
-    def transitions(self, stack, current_state, char):
-        if len(stack) != 0:
-            if current_state == "q0" and char == "" and stack[-1] == "S":
+    def transitions(self , stack , current_state , char): # Here we define all rules of the automata, taking in to account the production rules of the grammar
+        
+        if(len(stack) != 0):
+            
+            if (current_state == "q0" and char == "" and stack[-1] == "S"):
                 stack.pop()
                 return 1
             elif current_state == "q0" and char == "a" and stack[-1] == "S":
@@ -45,24 +47,30 @@ class PDA:
                 return -1
         else:
             return -1
-
+        
+        # In case we dont find any rule that match the current state and char, we return -1, meaning that the string is not valid
+ 
+        
     def is_valid(self, string):
         stack = []
-        stack.append(self.starting_pile_symbol)
+        stack.append(self.starting_pile_symbol) # Start the stack with the starting pile symbol
 
-        if len(string) == 0:
+        if len(string) == 0: # If the string is empty, we return true, because the grammar accepts epsilon
             return True
 
         transitions_done = []
 
         for char in string:
-            transitions_done.append(self.transitions(stack, self.starting_state, char))
-
+            transitions_done.append(self.transitions(stack, self.starting_state, char))  # Append every number of the transitions done 
+        
         for transition in transitions_done:
-            if transition == -1:
-                return False
-
-        return len(stack) == 0
+            if (transition == -1):
+                return False        # If we find a transition that is -1, we return false, because the string is not valid
+            
+        if (len(stack) != 0):
+            return False    # If the stack is not empty, we return false, because the string is not valid
+        
+        return True  # Else, we return true, because the string is valid
 
 
 pda = PDA()
