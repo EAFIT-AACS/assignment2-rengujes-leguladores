@@ -61,12 +61,12 @@ class PDA:
         transitions_done = []
 
         for char in string:
-            transitions_done.append(self.transitions(stack, self.starting_state, char))  # Append every number of the transitions done 
-        
-        for transition in transitions_done:
-            if (transition == -1):
-                return False        # If we find a transition that is -1, we return false, because the string is not valid
+            if(self.transitions(stack, self.starting_state, char) == -1):
+                transitions_done.append(self.transitions(stack, self.starting_state, char)) # Break when we find a transition that is not valid
+                return False
             
+            transitions_done.append(self.transitions(stack, self.starting_state, char))  # Append every number of the transitions done 
+
         if (len(stack) != 0):
             return False    # If the stack is not empty, we return false, because the string is not valid
         
