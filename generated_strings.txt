@@ -1,0 +1,14 @@
+============================
+       GENERATED STRINGS     
+============================
+
+1. baba
+2. a
+3. aabb
+4. bba
+5. ab
+6. babbaaba
+7. aaaaaaabbbbbbb
+8. babbab
+9. aaa
+10. aabbbbb
