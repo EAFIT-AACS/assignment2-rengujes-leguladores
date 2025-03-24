@@ -223,65 +223,79 @@ Here, we define all the transition rules of our PDA, transition rules already de
 ```
 We define a method that is going to check if a string can be read by the PDA. It is going to store the set of transitions made for getting to an acceptance state. This would be crucial for the trird algorithm.
 
+```python
+ def return_valid_strings(self , set_of_strings): # Method for returning only the valid strings with their transitions
+        
+        accepted_transitions = []
+        accepted_strings = []
+
+        for string in set_of_strings:
+            
+
+            accepted , transitions_done = self.is_valid(string)
+
+            if accepted:
+                accepted_transitions.append(transitions_done)
+                accepted_strings.append(string)
+            
+        return accepted_strings , accepted_transitions
+
+```
+
+Here we have a method for returning only the accepted strings and their transitions. 
+
 ### Third algorithm
 
 ```python
         
 from tabulate import tabulate
-from ALGORITHM_2_LFCO_2025_AT_SS import PDA
-
-pda = PDA()
 
 class Rules_table:
-    def aplied_rules(self , string):
-            
-        accepted , transitions_done = pda.is_valid(string) # Look for the accepted strings and return the transitions done to reach that state of acceptance
-    
-        if accepted:
+    def aplied_rules(self , string ,  transitions_done):
+                
+        set_of_applied_rules = [["", f"q0 , {string} , S"]] # Start with the initial state, the string given and the starting pile symbol
+        
+        pile = "" # Start with an empty pile (Its just for showing the transitions done on the pile)
 
-            set_of_applied_rules = [["", f"q0 , {string} , S"]] # Start with the initial state, the string given and the starting pile symbol
-            
-            pile = "" # Start with an empty pile (Its just for showing the transitions done on the pile)
+        for number in transitions_done:
+            string = string[1:] # Remove the first letter of the string for every iteration
 
-            for number in transitions_done:
-                string = string[1:] # Remove the first letter of the string for every iteration
+            if len(string) == 0:
+                string = "ε" # If the string is empty, we replace it with epsilon
 
-                if len(string) == 0:
-                    string = "ε" # If the string is empty, we replace it with epsilon
+            # Append every rule used depending on the number of the transition done
 
-                # Append every rule used depending on the number of the transition done
+            if(number == 1): 
+                set_of_applied_rules.append(["(i)" ,  "q0, ε, ε"]) 
+            elif(number == 2):
+                pile = pile + "A"
+                set_of_applied_rules.append(["(ii)" , f"q0 , {string} , {pile}"])
+                
+            elif(number == 3):
+                pile = pile + "A"
+                set_of_applied_rules.append(["(iii)" , f"q0 , {string} , {pile}"])
+                
+            elif(number == 4):
+                pile = pile[1:]
+                if pile == "":
+                    pile = "ε"
+                set_of_applied_rules.append(["(iv)" , f"q1 , {string} , {pile}"])
+                
+            elif(number == 5):
+                pile = pile[1:]
+                if pile == "":
+                    pile = "ε"
+                set_of_applied_rules.append(["(v)" , f"q1 , {string} , {pile}"])
 
-                if(number == 1): 
-                    set_of_applied_rules.append(["(i)" ,  "q0, ε, ε"]) 
-                elif(number == 2):
-                    pile = pile + "A"
-                    set_of_applied_rules.append(["(ii)" , f"q0 , {string} , {pile}"])
-                    
-                elif(number == 3):
-                    pile = pile + "A"
-                    set_of_applied_rules.append(["(iii)" , f"q0 , {string} , {pile}"])
-                    
-                elif(number == 4):
-                    pile = pile[1:]
-                    if pile == "":
-                        pile = "ε"
-                    set_of_applied_rules.append(["(iv)" , f"q1 , {string} , {pile}"])
-                    
-                elif(number == 5):
-                    pile = pile[1:]
-                    if pile == "":
-                        pile = "ε"
-                    set_of_applied_rules.append(["(v)" , f"q1 , {string} , {pile}"])
+        table = tabulate(set_of_applied_rules, headers=["Rules", "Computation of M on input x"], tablefmt="grid")
+        print(table) 
 
-            table = tabulate(set_of_applied_rules, headers=["Rules", "Computation of M on input x"], tablefmt="grid")
-            print(table) 
+        print("\n")
 
-            print("\n")
                                                   
 ```
 
-We are going to import tabulate, for printing in a prittier way the results. Also, we are imporitng the second algorithm for using its .is_valid() method.
-If the method returns that a string is valid, we are going to start printing each step taken for the validation of the string. We have an advantage because this method also returns the transition done to the string, so we only need to associate the number of the transition with its corresponding rule. When we iterate through all the transitions done, we print the resulting table with all the rules that were applied.
+We are going to import tabulate to print the results prettier. We are iterating through every transition made to the string, so we only need to associate the transition's number with its corresponding rule. When we iterate through all the transitions, we print the resulting table with all the rules applied, the resulting string by every step taken, and the symbols of the pile. 
 
 
 ### Main
@@ -332,9 +346,11 @@ for string in set_of_strings:
 for idx, (s, result) in enumerate(results, 1):
     print(f"{idx}. {s} {result}")
 
+valid_strings , valid_transitions = pda.return_valid_strings(set_of_strings) # Get only the valid strings and their transitions
+
 ```
 
-We print if the string is accepted or not, adding an emoji to make it clearer. 
+We print if the string is accepted or not, adding an emoji to make it clearer. Then, we execute the .return_valid_strings to get only the accepted strings and their transitions. This is going to be useful for following the structure given.
 
 ```python
 
@@ -342,12 +358,17 @@ We print if the string is accepted or not, adding an emoji to make it clearer.
 
 print("\n📊 Applying rules... 📊\n")
 
-for string in set_of_strings:
-    rules_table.aplied_rules(string)
+
+for i in range(len(valid_strings)):
+    
+    string = valid_strings[i]
+    transitions_done = valid_transitions[i]
+
+    rules_table.aplied_rules(string , transitions_done)
 
 ```
 
-We execute the third algorithm for every string generated, so we can later print every accepted string process of computation. 
+We execute the third algorithm for every string accepted, iterating for the strings and transitions accepted by the PDA.
 
 
 

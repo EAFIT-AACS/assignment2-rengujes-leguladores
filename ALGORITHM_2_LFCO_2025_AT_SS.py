@@ -58,4 +58,19 @@ class PDA:
         
         return True , transitions_done  # Else, we return true, because the string is valid
 
-    
+    def return_valid_strings(self , set_of_strings): # Method for returning only the valid strings with their transitions
+        
+        accepted_transitions = []
+        accepted_strings = []
+
+        for string in set_of_strings:
+            
+
+            accepted , transitions_done = self.is_valid(string)
+
+            if accepted:
+                accepted_transitions.append(transitions_done)
+                accepted_strings.append(string)
+            
+        return accepted_strings , accepted_transitions
+            

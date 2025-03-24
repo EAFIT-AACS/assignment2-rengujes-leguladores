@@ -35,12 +35,19 @@ for string in set_of_strings:
 for idx, (s, result) in enumerate(results, 1):
     print(f"{idx}. {s} {result}")
 
+valid_strings , valid_transitions = pda.return_valid_strings(set_of_strings) # Get only the valid strings and their transitions
+
 # Run the third algorithm
 
 print("\n📊 Applying rules... 📊\n")
 
-for string in set_of_strings:
-    rules_table.aplied_rules(string)
+
+for i in range(len(valid_strings)):
+    
+    string = valid_strings[i]
+    transitions_done = valid_transitions[i]
+
+    rules_table.aplied_rules(string , transitions_done)
     
 
 
