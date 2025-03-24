@@ -104,11 +104,12 @@ In case option (random variable) is equal to 0, this function will be called and
 ```python
 
 def generateStrings(self):
-    string_set = set()   # Using a set to avoid duplicate data
-    # Generated unique strings 
-    while len(string_set) < random.randint(5 , 11):
-        option = random.choice([0, 1])
-        num_letters = random.randint(1, 10)  # Ensure that there is at least 1 letter
+        string_set = set()   # Using a set to avoid duplicate data
+        # Generated unique strings 
+        while len(string_set) < random.randint(5 , 11):
+            option = random.choice([0, 1])
+            num_letters = random.randint(0, 10) 
+            
             if option == 1:
                 generated_string = self.valid(num_letters)
             else:
@@ -117,7 +118,7 @@ def generateStrings(self):
             
             # Add only if is in a set
             if generated_string not in string_set:
-                string_set.add(generated_string)                       
+                string_set.add(generated_string)                      
 
 ```
 
