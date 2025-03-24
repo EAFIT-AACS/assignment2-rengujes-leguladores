@@ -1,6 +1,5 @@
 import random
 
-
 class StringGenerator:
 
     def __init__(self):
@@ -21,7 +20,7 @@ class StringGenerator:
         # Generated unique strings 
         while len(string_set) < random.randint(5 , 11):
             option = random.choice([0, 1])
-            num_letters = random.randint(1, 10)  # Ensure that there is at least 1 letter
+            num_letters = random.randint(0, 10) 
             
             if option == 1:
                 generated_string = self.valid(num_letters)

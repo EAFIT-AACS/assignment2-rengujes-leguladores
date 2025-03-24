@@ -12,16 +12,16 @@ class PDA:
                 return 1 , current_state
             elif (current_state == "q0" and char == "a" and stack[-1] == "S"):
                 stack.pop()
-                stack.append("a")
+                stack.append("A")
                 return 2 , current_state
-            elif (current_state == "q0" and char == "a" and stack[-1] == "a"):
-                stack.append("a")
+            elif (current_state == "q0" and char == "a" and stack[-1] == "A"):
+                stack.append("A")
                 return 3 , current_state
-            elif (current_state == "q0" and char == "b" and stack[-1] == "a"):
+            elif (current_state == "q0" and char == "b" and stack[-1] == "A"):
                 stack.pop()
                 current_state = "q1"
                 return 4 , current_state
-            elif (current_state == "q1" and char == "b" and stack[-1] == "a"):
+            elif (current_state == "q1" and char == "b" and stack[-1] == "A"):
                 stack.pop()
                 return 5 , current_state
             else:

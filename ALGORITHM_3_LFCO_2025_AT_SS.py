@@ -25,11 +25,11 @@ class Rules_table:
                 if(number == 1): 
                     set_of_applied_rules.append(["(i)" ,  "q0, ε, ε"]) 
                 elif(number == 2):
-                    pile = pile + "a"
+                    pile = pile + "A"
                     set_of_applied_rules.append(["(ii)" , f"q0 , {string} , {pile}"])
                     
                 elif(number == 3):
-                    pile = pile + "a"
+                    pile = pile + "A"
                     set_of_applied_rules.append(["(iii)" , f"q0 , {string} , {pile}"])
                     
                 elif(number == 4):
