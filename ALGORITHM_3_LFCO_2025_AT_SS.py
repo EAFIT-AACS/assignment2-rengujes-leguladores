@@ -51,3 +51,5 @@ class Rules_table:
 
             table = tabulate(set_of_applied_rules, headers=["Rules", "Computation of M on input x"], tablefmt="grid")
             print(table) 
+
+            print("\n")
