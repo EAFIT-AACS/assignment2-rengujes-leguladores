@@ -152,4 +152,3 @@ with open("results.txt", "w", encoding="utf-8") as output_file:
     output_file.write(table)
 
 print("\n✅ Results exported to 'results.txt'")
-

@@ -1,4 +1,5 @@
 import random
+import pyfiglet
 def valid (num_letters):
     # Generated a string with "a" followed by "b"
     sub_string_a = "a" * num_letters
@@ -9,14 +10,14 @@ def invalid (num_letters):
     generated_string = "".join(random.choice(["a", "b"]) for _ in range(num_letters))
     return generated_string
 # Ask user for string generated number
-num_strings = int(input("Please enter how many strings you want to generate: "))
+
+num_strings = random.randint(5,10)
 string_set = set() # Using a set to avoid duplicate data
 
 # Generated unique strings
 while len(string_set) < num_strings:
     option = random.choice([0, 1])
-    num_letters = random.randint(1, 10)  # Ensure that there is at least 1 letter
-    
+    num_letters = random.randint(0, 10)  # Ensure that there is at least 1 letter
     if option == 1:
         generated_string = valid(num_letters)
     else:
@@ -26,6 +27,15 @@ while len(string_set) < num_strings:
     # Add only if is in a set
     if generated_string not in string_set:
         string_set.add(generated_string)  
+# Set of emojis to choose 
+emojis=["🔥", "🌟","💎", "📊", "👨‍💻", "💡", "⌨️", "🖱️", "🥑"]
+# Print strings by terminal in the deserved way
+print("🎲 Generating random strings... 🎲\n")
+for idx, s in enumerate(string_set, 1):
+    emoji = random.choice(emojis)  # Choose a emoji of the set "emojis" 
+    print(f"✨ String {idx}: {emoji}  \"{s}\"")
+
+#Added value with .txt file which contains the generated strings 
 
 # Create a .txt file 
 txt_content = "============================\n"
