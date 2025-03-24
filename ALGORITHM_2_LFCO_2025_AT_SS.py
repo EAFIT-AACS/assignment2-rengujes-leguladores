@@ -1,27 +1,3 @@
-
-
-with open("generated_strings.txt", "r") as file:
-    lines = file.readlines()  # Read all lines from the file
-
-string_list = []  # Initialize an empty list
-
-# Iterate over all lines in the file
-for line in lines:
-    # Remove spaces at the beginning and end, and the period (.) after the number
-    line = line.strip()
-    
-    # If the line starts with a number and a period, remove them
-    if line and line[0].isdigit():  # Check if the line starts with a number
-        # Remove the period and any extra spaces after the number
-        line = line.split(".", 1)[1].strip() if "." in line else line.strip()
-        
-        # If the line is not empty after processing, add it to the list
-        if line:
-            string_list.append(line)
-        else:
-            string_list.append("")  # If it's empty, add an empty string
-            
-
 class PDA:
     def __init__(self):
         self.starting_pile_symbol = "S" # Give the PDA starting parameters
@@ -71,8 +47,8 @@ class PDA:
 
             transition , current_state = self.transitions(stack, current_state, char)
             if transition == -1: 
-                transitions_done.append(transition) # Break when we find a transition that is not valid
-                return False , transitions_done 
+                transitions_done.append(transition) 
+                return False , transitions_done # Break when we find a transition that is not valid
             
             transitions_done.append(transition)  # Append every number of the transitions done 
             

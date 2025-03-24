@@ -6,29 +6,24 @@ pda = PDA()
 class Rules_table:
     def aplied_rules(self , string):
             
-        accepted , transitions_done = pda.is_valid(string)
+        accepted , transitions_done = pda.is_valid(string) # Look for the accepted strings and return the transitions done to reach that state of acceptance
     
-                  
+        if accepted:
 
-        if accepted:             
-
-            set_of_applied_rules = [["", f"q0 , {string} , S"]]              
+            set_of_applied_rules = [["", f"q0 , {string} , S"]] # Start with the initial state, the string given and the starting pile symbol
             
-            if len(string) == 0:
-                string = "ε"
-
-            set_of_applied_rules = [["", f"q0 , {string} , S"]]
-
-            pile = ""
+            pile = "" # Start with an empty pile (Its just for showing the transitions done on the pile)
 
             for number in transitions_done:
-                string = string[1:]
+                string = string[1:] # Remove the first letter of the string for every iteration
 
                 if len(string) == 0:
-                    string = "ε"
+                    string = "ε" # If the string is empty, we replace it with epsilon
 
-                if(number == 1):
-                    set_of_applied_rules.append(["(i)" ,  "q0, ε, ε"])
+                # Append every rule used depending on the number of the transition done
+
+                if(number == 1): 
+                    set_of_applied_rules.append(["(i)" ,  "q0, ε, ε"]) 
                 elif(number == 2):
                     pile = pile + "a"
                     set_of_applied_rules.append(["(ii)" , f"q0 , {string} , {pile}"])
