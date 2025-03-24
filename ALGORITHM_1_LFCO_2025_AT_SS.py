@@ -20,7 +20,7 @@ class StringGenerator:
         # Generated unique strings 
         while len(string_set) < random.randint(5 , 11):
             option = random.choice([0, 1])
-            num_letters = random.randint(0, 10) 
+            num_letters = random.randint(0, 10)  # 0 to 10, because we take into account the case where the string is empty
             
             if option == 1:
                 generated_string = self.valid(num_letters)
