@@ -41,7 +41,7 @@ In the process of building the PDA, it was necessary to remember the equivalence
 In this ideas line, initially, we had a CFG defined as follows: 
 
 
-    S-> aSb | ε , in the form G = {N,Σ,P,S}
+    S-> aSb | ε , in the form G = (N,Σ,P,S)
 
 and we convert that to this PDA: 
  N = (Q, Σ, 𝜞, 𝜹, 𝒔, 𝑭 )
